@@ -1,6 +1,8 @@
 <?php
 session_start();
 require_once __DIR__ . '/../config/database.php';
+$initRole = (isset($_GET['role']) && $_GET['role'] === 'admin') ? 'admin' : 'siswa';
+$isAdmin = $initRole === 'admin';
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -357,13 +359,13 @@ require_once __DIR__ . '/../config/database.php';
     <div class="bg-shape-1"></div>
     <div class="bg-shape-2"></div>
 
-    <div class="login-container" id="mainContainer">
+    <div class="login-container" id="mainContainer" class="<?= $isAdmin ? 'role-admin-active' : '' ?>">
         <div class="login-card">
             <div class="login-header">
                 <div class="icon-box" id="iconBox">
-                    <i class="fas fa-user-graduate"></i>
+                    <i class="fas <?= $isAdmin ? 'fa-shield-halved' : 'fa-user-graduate' ?>"></i>
                 </div>
-                <h1 id="loginTitle">Siswa Login</h1>
+                <h1 id="loginTitle"><?= $isAdmin ? 'Admin Login' : 'Siswa Login' ?></h1>
                 <p>Masukkan akun Anda untuk melanjutkan</p>
             </div>
 
@@ -381,14 +383,14 @@ require_once __DIR__ . '/../config/database.php';
                 </div>
             <?php endif; ?>
 
-            <div class="role-switcher">
+            <div class="role-switcher <?= $isAdmin ? 'role-admin-active' : '' ?>">
                 <div class="role-slider"></div>
-                <div class="role-btn active" id="btnSiswa" onclick="switchRole('siswa')">Siswa</div>
-                <div class="role-btn" id="btnAdmin" onclick="switchRole('admin')">Administrator</div>
+                <div class="role-btn <?= !$isAdmin ? 'active' : '' ?>" id="btnSiswa" onclick="switchRole('siswa')">Siswa</div>
+                <div class="role-btn <?= $isAdmin ? 'active' : '' ?>" id="btnAdmin" onclick="switchRole('admin')">Administrator</div>
             </div>
 
             <form action="<?= base_url('controllers/AuthController.php?action=login') ?>" method="POST">
-                <input type="hidden" name="role" id="loginRole" value="siswa">
+                <input type="hidden" name="role" id="loginRole" value="<?= $initRole ?>">
                 
                 <div class="form-group">
                     <label class="form-label">Username</label>
