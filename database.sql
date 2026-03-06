@@ -1,7 +1,4 @@
--- Drop Database if exists to ensure clean slate
-DROP DATABASE IF EXISTS pengaduan_sekolah;
-CREATE DATABASE pengaduan_sekolah;
-USE pengaduan_sekolah;
+
 
 -- Table: users
 CREATE TABLE users (
