@@ -1,18 +1,26 @@
 <?php
-$db_url = getenv('DATABASE_URL');
+function env($key, $default = '') {
+    $val = getenv($key);
+    if ($val !== false && $val !== '') return $val;
+    if (isset($_ENV[$key]) && $_ENV[$key] !== '') return $_ENV[$key];
+    if (isset($_SERVER[$key]) && $_SERVER[$key] !== '') return $_SERVER[$key];
+    return $default;
+}
+
+$db_url = env('DATABASE_URL') ?: env('MYSQL_URL');
 if ($db_url) {
     $parsed_url = parse_url($db_url);
-    $host = $parsed_url['host'];
+    $host = $parsed_url['host'] ?? 'localhost';
     $port = $parsed_url['port'] ?? 3306;
-    $db   = ltrim($parsed_url['path'], '/');
-    $user = $parsed_url['user'];
-    $pass = $parsed_url['pass'];
+    $db   = isset($parsed_url['path']) ? ltrim($parsed_url['path'], '/') : 'pengaduan_sekolah';
+    $user = isset($parsed_url['user']) ? urldecode($parsed_url['user']) : 'root';
+    $pass = isset($parsed_url['pass']) ? urldecode($parsed_url['pass']) : '';
 } else {
-    $host = getenv('DB_HOST') ?: 'localhost';
-    $port = getenv('DB_PORT') ?: '3306';
-    $db   = getenv('DB_NAME') ?: 'pengaduan_sekolah';
-    $user = getenv('DB_USER') ?: 'root';
-    $pass = getenv('DB_PASSWORD') ?: '';
+    $host = env('DB_HOST') ?: env('MYSQL_HOST') ?: 'localhost';
+    $port = env('DB_PORT') ?: env('MYSQL_PORT') ?: '3306';
+    $db   = env('DB_NAME') ?: env('MYSQL_DATABASE') ?: 'pengaduan_sekolah';
+    $user = env('DB_USER') ?: env('MYSQL_USER') ?: 'root';
+    $pass = env('DB_PASSWORD') ?: env('DB_PASS') ?: env('MYSQL_PASSWORD') ?: env('PASSWORD') ?: '';
 }
 
 $charset = 'utf8mb4';
