@@ -9,7 +9,7 @@ require_once __DIR__ . '/config/database.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>E-Aspirasi - Sistem Pengaduan Sekolah</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/fahmi/assets/css/style.css">
+    <link rel="stylesheet" href="<?= base_url('assets/css/style.css') ?>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
@@ -207,10 +207,10 @@ require_once __DIR__ . '/config/database.php';
             <span>E-Aspirasi</span>
         </div>
         <nav style="display: flex; align-items: center; gap: 12px;">
-            <a href="/fahmi/auth/login.php?role=admin" class="btn btn-outline" style="border-radius: 9999px;">
+            <a href="<?= base_url('auth/login.php?role=admin') ?>" class="btn btn-outline" style="border-radius: 9999px;">
                 <i class="fas fa-shield-alt" style="margin-right: 8px;"></i> Login Admin
             </a>
-            <a href="/fahmi/auth/login.php" class="btn btn-outline" style="border-radius: 9999px;">
+            <a href="<?= base_url('auth/login.php') ?>" class="btn btn-outline" style="border-radius: 9999px;">
                 <i class="fas fa-graduation-cap" style="margin-right: 8px;"></i> Login Siswa
             </a>
         </nav>
@@ -225,7 +225,7 @@ require_once __DIR__ . '/config/database.php';
                 <a href="#fungsi" class="btn btn-primary" style="padding: 16px 48px; border-radius: 9999px; font-size: 1.1rem;">
                     Pelajari Caranya <i class="fas fa-chevron-down" style="margin-left: 10px;"></i>
                 </a>
-                <a href="/fahmi/auth/register.php" class="btn btn-outline" style="padding: 16px 48px; border-radius: 9999px; font-size: 1.1rem; background: white;">
+                <a href="<?= base_url('auth/register.php') ?>" class="btn btn-outline" style="padding: 16px 48px; border-radius: 9999px; font-size: 1.1rem; background: white;">
                     Daftar Sekarang <i class="fas fa-user-plus" style="margin-left: 10px;"></i>
                 </a>
             </div>
