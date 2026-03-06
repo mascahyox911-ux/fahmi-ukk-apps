@@ -43,8 +43,9 @@ try {
 }
 
 function base_url($path = '') {
-    $isVercel = getenv('VERCEL') == '1' || getenv('VERCEL_ENV');
-    $base = $isVercel ? '/' : '/fahmi/';
+    $host = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '';
+    $isLocalhost = (strpos($host, 'localhost') !== false || strpos($host, '127.0.0.1') !== false);
+    $base = $isLocalhost ? '/fahmi/' : '/';
     return $base . ltrim($path, '/');
 }
 ?>
