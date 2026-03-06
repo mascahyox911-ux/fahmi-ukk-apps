@@ -20,7 +20,7 @@ class AuthController {
             if ($user) {
                 if ($user['role'] !== $selectedRole) {
                     $_SESSION['error'] = "Akun ini tidak memiliki akses ke halaman login " . ucfirst($selectedRole) . "!";
-                    header("Location: /fahmi/auth/login.php?role=" . $selectedRole);
+                    header("Location: " . base_url('auth/login.php?role=' . $selectedRole));
                     exit;
                 }
 
@@ -29,14 +29,14 @@ class AuthController {
                 $_SESSION['nama'] = $user['nama'];
 
                 if ($user['role'] === 'admin') {
-                    header("Location: /fahmi/admin/dashboard.php");
+                    header("Location: " . base_url('admin/dashboard.php'));
                 } else {
-                    header("Location: /fahmi/siswa/dashboard.php");
+                    header("Location: " . base_url('siswa/dashboard.php'));
                 }
                 exit;
             } else {
                 $_SESSION['error'] = "Username atau password salah!";
-                header("Location: /fahmi/auth/login.php?role=" . $selectedRole);
+                header("Location: " . base_url('auth/login.php?role=' . $selectedRole));
                 exit;
             }
         }
@@ -54,7 +54,7 @@ class AuthController {
             foreach ($allUsers as $u) {
                 if ($u['username'] === $username) {
                     $_SESSION['error'] = "Username sudah digunakan!";
-                    header("Location: /fahmi/auth/register.php");
+                    header("Location: " . base_url('auth/register.php'));
                     exit;
                 }
             }
@@ -62,10 +62,10 @@ class AuthController {
             $success = $this->userModel->addUser($nama, $username, $password, $role);
             if ($success) {
                 $_SESSION['success'] = "Pendaftaran berhasil! Silakan login.";
-                header("Location: /fahmi/auth/login.php");
+                header("Location: " . base_url('auth/login.php'));
             } else {
                 $_SESSION['error'] = "Gagal mendaftar, silakan coba lagi.";
-                header("Location: /fahmi/auth/register.php");
+                header("Location: " . base_url('auth/register.php'));
             }
             exit;
         }
@@ -73,7 +73,7 @@ class AuthController {
 
     public function logout() {
         session_destroy();
-        header("Location: /fahmi/auth/login.php");
+        header("Location: " . base_url('auth/login.php'));
         exit;
     }
 }

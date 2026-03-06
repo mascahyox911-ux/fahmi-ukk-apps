@@ -1,7 +1,9 @@
 <?php
 session_start();
+require_once __DIR__ . '/../config/database.php';
+
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
-    header("Location: /fahmi/auth/login.php");
+    header("Location: " . base_url('auth/login.php'));
     exit;
 }
 
@@ -89,7 +91,7 @@ $selesai = count(array_filter($allAspirasi, function($a) { return $a['status'] =
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - Pengaduan Sekolah</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/fahmi/assets/css/style.css">
+    <link rel="stylesheet" href="<?= base_url('assets/css/style.css') ?>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
@@ -108,7 +110,7 @@ $selesai = count(array_filter($allAspirasi, function($a) { return $a['status'] =
                     <li><a href="dashboard.php?page=pengaturan" class="<?= $page == 'pengaturan' ? 'active' : '' ?>"><i class="fas fa-cog"></i> <span>Pengaturan</span></a></li>
                 </ul>
                 <div style="margin-top: auto; padding-top: 20px; border-top: 1px solid var(--border);">
-                    <a href="/fahmi/auth/logout.php" class="btn btn-outline" style="width: 100%; justify-content: flex-start;" onclick="return confirm('Apakah Anda yakin ingin keluar dari sistem?')">
+                    <a href="<?= base_url('auth/logout.php') ?>" class="btn btn-outline" style="width: 100%; justify-content: flex-start;" onclick="return confirm('Apakah Anda yakin ingin keluar dari sistem?')">
                         <i class="fas fa-sign-out-alt"></i> <span>Keluar</span>
                     </a>
                 </div>
@@ -216,8 +218,8 @@ $selesai = count(array_filter($allAspirasi, function($a) { return $a['status'] =
                                             <?= htmlspecialchars(substr($row['deskripsi'], 0, 100)) ?>...
                                         </div>
                                         <?php if($row['fotobukti']): ?>
-                                            <a href="/fahmi/assets/uploads/<?= $row['fotobukti'] ?>" target="_blank">
-                                                <img src="/fahmi/assets/uploads/<?= $row['fotobukti'] ?>" alt="Bukti" style="width: 100px; height: 75px; object-fit: cover; border-radius: 8px; border: 1px solid var(--border);">
+                                            <a href="<?= base_url('assets/uploads/' . $row['fotobukti']) ?>" target="_blank">
+                                                <img src="<?= base_url('assets/uploads/' . $row['fotobukti']) ?>" alt="Bukti" style="width: 100px; height: 75px; object-fit: cover; border-radius: 8px; border: 1px solid var(--border);">
                                             </a>
                                         <?php endif; ?>
                                     </td>
