@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once __DIR__ . '/../config/database.php';
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -8,7 +9,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daftar Akun - E-Aspirasi Sekolah</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/fahmi/assets/css/style.css">
+    <link rel="stylesheet" href="<?= base_url('assets/css/style.css') ?>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
@@ -321,7 +322,7 @@ session_start();
                 </div>
             <?php endif; ?>
 
-            <form action="/fahmi/controllers/AuthController.php?action=register" method="POST">
+            <form action="<?= base_url('controllers/AuthController.php?action=register') ?>" method="POST">
                 <div class="form-group">
                     <label class="form-label">Nama Lengkap</label>
                     <div class="input-wrapper">
@@ -360,12 +361,12 @@ session_start();
             </div>
             
             <div class="login-link">
-                <a href="/fahmi/auth/login.php">
+                <a href="<?= base_url('auth/login.php') ?>">
                     Login ke Akun Anda
                 </a>
             </div>
             
-            <a href="/fahmi/index.php" class="back-link">
+            <a href="<?= base_url('index.php') ?>" class="back-link">
                 <i class="fas fa-arrow-left" style="margin-right: 8px;"></i>
                 Kembali ke Beranda
             </a>
