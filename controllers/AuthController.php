@@ -19,12 +19,6 @@ class AuthController {
             $user = $this->userModel->login($username, $password);
 
             if ($user) {
-                if ($user['role'] !== $selectedRole) {
-                    $_SESSION['error'] = "Akun ini tidak memiliki akses ke halaman login " . ucfirst($selectedRole) . "!";
-                    header("Location: " . base_url('auth/login.php?role=' . $selectedRole));
-                    exit;
-                }
-
                 $_SESSION['user_id'] = $user['id_user'];
                 $_SESSION['role'] = $user['role'];
                 $_SESSION['nama'] = $user['nama'];
